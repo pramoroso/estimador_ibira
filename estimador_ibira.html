@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Estimador de Preço de Imóvel - Ibirá-SP</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f8f8;
+      padding: 20px;
+      max-width: 500px;
+      margin: auto;
+      border: 1px solid #ddd;
+      background-color: white;
+      border-radius: 8px;
+    }
+    h2 {
+      color: #333;
+    }
+    label, input {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    button {
+      background-color: #007BFF;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+    }
+    #resultado {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h2>Estimador de Preço de Imóvel - Centro de Ibirá-SP</h2>
+
+  <label for="areaConstruida">Área construída (m²):</label>
+  <input type="number" id="areaConstruida" placeholder="Ex: 150">
+
+  <label for="areaTerreno">Área do terreno (m²):</label>
+  <input type="number" id="areaTerreno" placeholder="Ex: 300">
+
+  <button onclick="estimarPreco()">Estimar Preço</button>
+
+  <div id="resultado"></div>
+
+  <script>
+    function estimarPreco() {
+      const areaConstruida = parseFloat(document.getElementById('areaConstruida').value);
+      const areaTerreno = parseFloat(document.getElementById('areaTerreno').value);
+
+      if (isNaN(areaConstruida) || isNaN(areaTerreno)) {
+        document.getElementById('resultado').innerText = "Por favor, preencha ambos os campos.";
+        return;
+      }
+
+      const coefConstruida = 1279.77;
+      const coefTerreno = 279.25;
+      const intercepto = 48700.85;
+
+      const preco = (coefConstruida * areaConstruida) + (coefTerreno * areaTerreno) + intercepto;
+
+      document.getElementById('resultado').innerText =
+        `Preço estimado: R$ ${preco.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    }
+  </script>
+</body>
+</html>
